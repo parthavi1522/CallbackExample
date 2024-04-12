@@ -1,0 +1,18 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  database: callback_example_development
+  username: root
+  password: Root@123456
+  host: localhost
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: callback_example_test
+
+production:
+  <<: *default
