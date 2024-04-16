@@ -1,3 +1,5 @@
+require 'date'
+
 class Book < ApplicationRecord
   validates :title, presence: true
 
@@ -52,6 +54,11 @@ class Book < ApplicationRecord
   def print_save_message
     puts "=============="
     puts 'Book is being saved...'
+    today = Date.today
+    if today.saturday? || today.sunday?
+      errors.add(:base, "Cannot insert record on a Saturday or Sunday")
+      throw(:abort)
+    end
   end
 
   def print_around_save_message
@@ -63,6 +70,9 @@ class Book < ApplicationRecord
   def print_saved_message
     puts "=============="
     puts 'Book saved!'
+    if (1..5).include?(Time.now.wday)  # Monday to Friday (1 to 5)
+      BackupBook.create(title: self.title, author: self.author)
+    end
   end
 
   def print_create_message

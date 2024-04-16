@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'backup_books/index'
   resources :books
-  root 'books#index'
+  resources :backup_books, only: [:index]
+  root 'home#index'
 end

@@ -1,0 +1,30 @@
+<h1>Listing Backup Books</h1>
+
+</br>
+
+<a href="<%= root_path %>">Home</a>
+
+</br>
+
+<% if @backup_books.present? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @backup_books.each do |backup_book| %>
+        <tr>
+          <td><%= backup_book.id %></td>
+          <td><%= backup_book.title %></td>
+          <td><%= backup_book.author %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
